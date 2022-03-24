@@ -1,4 +1,4 @@
-from hansenhandler import HansenHandler, DataType
+from scripts.hansenhandler import HansenHandler, DataType
 import rasterio
 import pandas as pd
 
