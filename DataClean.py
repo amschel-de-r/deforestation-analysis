@@ -180,7 +180,7 @@ def make_table(coords, debug=False) -> pd.DataFrame:
     return df
 
 
-n_splits = 503
+n_splits = 21
 
 
 def main(i_batch, debug):
