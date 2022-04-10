@@ -1,0 +1,22 @@
+# Here's a template for running jobs at CHTC
+
+# add this to .ssh/config (assuming they gave you an account on submit3.chtc.wisc.edu, which is their most capable submit server)
+
+Host CHTC
+    HostName 128.104.100.44
+    User [YOUR_USERNAME]
+
+# Then
+cd [~/MY_PROJ] && mkdir outfiles && cd [~]
+
+scp -r CHTC:~/[MY_PROJ] [~/MY_PROJ]
+ssh CHTC
+
+# on the CHTC node
+
+cd [MY_PROJ]
+condor_submit simple_job.sub
+
+# to see how things are going:
+condor_q # [-nobatch -better-analyze]
+condor_history -constraint 'owner == "[YOUR_USERNAME]"' -limit 100

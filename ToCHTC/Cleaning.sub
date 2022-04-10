@@ -1,0 +1,20 @@
+# Cleaning.sub
+
+
+universe                = docker
+docker_image            = nathanlazarus/pythondeforestation:v0
+executable              = python
+transfer_executable     = False
+arguments               = /code/DataClean.py $(Process)
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+error                   = outfiles/Cleaning_$(Process).err
+output                  = outfiles/Cleaning_$(Process).out
+log                     = outfiles/Cleaning.log
+request_cpus            = 1
+max_retries             = 10
+periodic_release        = (HoldReasonCode == 35) && (NumJobStarts < 10)
+
+request_disk            = 1GB
+request_memory          = 64GB
+queue 504
