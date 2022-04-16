@@ -2,7 +2,7 @@
 
 
 universe                = docker
-docker_image            = nathanlazarus/pythondeforestation:v0
+docker_image            = nathanlazarus/pythondeforestation:v5
 executable              = python
 transfer_executable     = False
 arguments               = /code/DataClean.py $(Process)
@@ -16,5 +16,5 @@ max_retries             = 10
 periodic_release        = (HoldReasonCode == 35) && (NumJobStarts < 10)
 
 request_disk            = 1GB
-request_memory          = 64GB
-queue 504
+request_memory          = 39GB
+queue 21

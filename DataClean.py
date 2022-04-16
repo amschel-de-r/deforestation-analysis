@@ -63,7 +63,7 @@ def latitude_square_area_matrix(lat_min, lat_max, pixels_per_side):
 
 
 def make_table(coords, debug=False) -> pd.DataFrame:
-    df = pd.read_csv("interim/country_bounds.csv")
+    df = pd.read_csv("code/interim/country_bounds.csv")
 
     outlines = {code: None for code in df.code.unique()}
 
@@ -203,7 +203,7 @@ def main(i_batch, debug):
         lat, long = coords
         lat_str = HansenHandler.lat_num2str(lat)
         long_str = HansenHandler.long_num2str(long)
-        df.to_csv(f"output/tile_stats_{lat_str}_{long_str}.csv")
+        df.to_csv(f"tile_stats_{lat_str}_{long_str}.csv")
 
 
 def valid_index(arg):

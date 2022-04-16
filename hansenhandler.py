@@ -24,7 +24,7 @@ class HansenHandler:
 
     @classmethod
     def getfilepath(cls, dtype: DataType, lat, long):
-        datadir = "raw"
+        datadir = "code/raw"
         filename = cls.getfilename(dtype, lat, long)
         return f"{datadir}/{filename}"
 

@@ -1,4 +1,4 @@
-from scripts.hansenhandler import HansenHandler, DataType
+from hansenhandler import HansenHandler, DataType
 import rasterio
 import pandas as pd
 
@@ -13,9 +13,12 @@ class Tile:
 
     def get_url(self, dType: DataType):
         return self.hh.geturlpath(dType, self.lat, self.long)
+    
+    def get_filepath(self, dtype: DataType):
+        return self.hh.getfilepath(dtype, self.lat, self.long)
 
-    def load_data(self, dType: DataType) -> rasterio.DatasetReader:
-        url = self.get_url(dType)
+    def load_data(self, dType: DataType, fromfile=False) -> rasterio.DatasetReader:
+        url = self.get_url(dType) if not fromfile else self.get_filepath(dType)
         return rasterio.open(url)
 
     def covers_country(self, df: pd.DataFrame):
