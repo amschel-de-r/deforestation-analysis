@@ -82,8 +82,8 @@ def make_table(coords, debug=False) -> pd.DataFrame:
         side_length = 2
         win = rasterio.windows.Window(offset, offset, side_length, side_length)
         win = rasterio.windows.Window(20000, 20000, 5, 1)
-        lat_min = (lat_max-lat_min)*offset/total_side
-        lat_max = lat_min + side_length/total_side
+        # lat_min = (lat_max-lat_min)*offset/total_side
+        # lat_max = lat_min + side_length/total_side
     else:
         win = None
 
@@ -128,11 +128,13 @@ def make_table(coords, debug=False) -> pd.DataFrame:
         geom = rasterize([(get_geom(code), i) for i, code in country_codes],
                          out_shape=mask.shape, fill=-2, transform=mask_affine)
 
+        del country_codes
+
         if not np.any(geom):
             print("No countries overlap tile")
             return df
 
-        if tropicTop:
+        if tropicTop is not None:
             geom[tropicTop:tropicBottom, :] += 1
 
         area = latitude_square_area_matrix(lat_min, lat_max, mask.shape[0])
@@ -158,7 +160,7 @@ def make_table(coords, debug=False) -> pd.DataFrame:
                             for cc in ["0", "1-25", "26-50", "51-75", "76-100"]], ignore_index=True)
             df = df.sort_values(by=["code", "tropics", "cover_cat"]).reset_index(drop=True)
 
-            print(np.unique(cover_cat))
+            # print(np.unique(cover_cat))
             geom_cat = geom * 5 + cover_cat
             del geom, cover_cat
 
