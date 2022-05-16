@@ -154,7 +154,7 @@ def make_table(coords, debug=False) -> pd.DataFrame:
             lossyear = read_band(loss_raster, window=win)
             lossyear = lossyear[mask]
             pos = cover > 0
-            cover_cat = cover
+            cover_cat = cover.copy()
             cover_cat[pos] = (cover[pos] - 1) // 25 + 1
             df = pd.concat([df.copy().assign(cover_cat=cc)
                             for cc in ["0", "1-25", "26-50", "51-75", "76-100"]], ignore_index=True)
@@ -171,7 +171,7 @@ def make_table(coords, debug=False) -> pd.DataFrame:
 
             area_cover = area*cover
             del area, cover
-            df["cover_2000"] = np.bincount(geom_cat, weights=area_cover, minlength=nrows)
+            df["cover_2000"] = np.bincount(geom_cat, weights=area_cover, minlength=nrows) / 100
 
             geom_cat = geom_cat * 21 + lossyear
             loss = np.bincount(geom_cat, weights=area_cover, minlength=nrows*21)
