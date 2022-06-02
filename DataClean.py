@@ -144,13 +144,15 @@ def make_table(coords, debug=False) -> pd.DataFrame:
         area = area[mask]
 
         with tile.load_data(DataType.treecover2000) as cover_raster, \
+                tile.load_data(DataType.gain) as gain_raster, \
                 tile.load_data(DataType.lossyear) as loss_raster:
-            # tile.load_data(DataType.gain) as gain_raster, \
 
             cover = read_band(cover_raster, window=win)
             cover = cover[mask]
 
-            # gain = read_band(gain_raster, window=win)
+            gain = read_band(gain_raster, window=win)
+            gain = gain[mask]
+
             lossyear = read_band(loss_raster, window=win)
             lossyear = lossyear[mask]
             pos = cover > 0
@@ -170,14 +172,28 @@ def make_table(coords, debug=False) -> pd.DataFrame:
             df["area"] = np.bincount(geom_cat, weights=area, minlength=nrows)
 
             area_cover = area*cover
-            del area, cover
+            # del area, cover
             df["cover_2000"] = np.bincount(geom_cat, weights=area_cover, minlength=nrows) / 100
 
+            loss_12 = -1 * (0 < lossyear < 13).astype(int)
+
+            df["loss_12"] = np.bincount(geom_cat[loss_12 < 0], weights=area_cover[loss_12 < 0], minlength=nrows) / 100
+            df["loss_12-flat"] = np.bincount(geom_cat[loss_12 < 0], weights=area[loss_12 < 0], minlength=nrows)
+
+            inv_area_cover = area * (100-cover)
+            df["gain"] = np.bincount(geom_cat[gain > 0], weights=inv_area_cover[gain > 0], minlength=nrows) / 100
+            df["gain-flat"] = np.bincount(geom_cat[gain > 0], weights=area[gain > 0], minlength=nrows)
+
+            lossgain = (gain - loss_12) > 1
+            df["lossgain-flat"] = np.bincount(geom_cat[lossgain], weights=area[lossgain], minlength=nrows)
+
             geom_cat = geom_cat * 21 + lossyear
-            loss = np.bincount(geom_cat, weights=area_cover, minlength=nrows*21)
+            df["highest_cat"] = np.max(geom_cat)
+            del lossyear
+            loss = np.bincount(geom_cat, weights=area, minlength=nrows*21)
             loss = loss.reshape((-1, 21))[:, 1:]
 
-            lossyear_labels = [f"loss_20{year+1}" for year in range(20)]
+            lossyear_labels = [f"loss-flat_20{year+1}" for year in range(20)]
             df[[*lossyear_labels]] = loss
     return df
 
