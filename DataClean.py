@@ -63,7 +63,7 @@ def latitude_square_area_matrix(lat_min, lat_max, pixels_per_side):
 
 
 def make_table(coords, debug=False) -> pd.DataFrame:
-    df = pd.read_csv("code/interim/country_bounds.csv")
+    df = pd.read_csv("/code/interim/country_bounds.csv")
 
     outlines = {code: None for code in df.code.unique()}
 
