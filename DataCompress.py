@@ -127,7 +127,7 @@ def main(i_batch, debug):
     batch = batches[i_batch]
 
     for coords in batch:
-        save_rescaled(coords, debug)
+        save_rescaled(coords)
 
 
 def valid_index(arg):
