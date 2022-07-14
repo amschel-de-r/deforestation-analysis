@@ -8,7 +8,7 @@ COPY DataClean.py .
 COPY countryoutlines.py .
 COPY hansenhandler.py .
 COPY tile.py .
-COPY raw ./raw
+COPY data/raw ./data/raw
 COPY interim ./interim
 
 # COPY requirements.txt .

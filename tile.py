@@ -13,7 +13,7 @@ class Tile:
 
     def get_url(self, dType: DataType):
         return self.hh.geturlpath(dType, self.lat, self.long)
-    
+
     def get_filepath(self, dtype: DataType):
         return self.hh.getfilepath(dtype, self.lat, self.long)
 
