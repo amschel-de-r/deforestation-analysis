@@ -1,0 +1,3 @@
+,code,group,minx,miny,maxx,maxy,country,lat,long,tropics
+0,ATA,1,-179.99999999999994,-90.0,180.0,-59.59375,Antarctica,-50,10,False
+1,ATA,1,-179.99999999999994,-90.0,180.0,-59.59375,Antarctica,-50,10,True
