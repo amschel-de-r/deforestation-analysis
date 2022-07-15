@@ -100,7 +100,7 @@ def save_rescaled(coords):
                 del band
 
             with rasterio.open("temp.tif") as loss_new:
-                lossy = rescale(loss_new)
+                lossy = rescale(loss_new, Resampling.average)
 
             np.save(f"{fpath}_loss_{y}.npy", lossy)
 
