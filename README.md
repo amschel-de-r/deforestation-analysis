@@ -24,6 +24,6 @@ Both take significant time and memory to run, so are best run on a server. Both 
 - combine_hansen_compressed.ipynb
     - Combines compressed tiles for use in map graph
 ### Graphs
-- Graphs_Line.ipynb (finished apart from comments, open to edits)
+- Graphs_Line.ipynb (up to date, open to edits)
 - Graphs_Map.ipynb (work in progress, open to edits but may be updated with new data)
 
