@@ -9,7 +9,7 @@ COPY countryoutlines.py .
 COPY hansenhandler.py .
 COPY tile.py .
 COPY data/raw ./data/raw
-COPY interim ./interim
+COPY data/interim ./data/interim
 
 # COPY requirements.txt .
 # RUN pip install --no-cache-dir -r requirements.txt
