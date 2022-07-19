@@ -4,5 +4,5 @@
 # pip install numpy casadi
 # pip freeze > requirements.txt
 docker login -u nathanlazarus
-docker build -t nathanlazarus/pythondeforestation:v5 .
-docker push nathanlazarus/pythondeforestation:v5
+docker build -t nathanlazarus/pythondeforestation:compressing .
+docker push nathanlazarus/pythondeforestation:compressing

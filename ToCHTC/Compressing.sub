@@ -1,0 +1,20 @@
+# Compressing.sub
+
+
+universe                = docker
+docker_image            = nathanlazarus/pythondeforestation:compressing
+executable              = python
+transfer_executable     = False
+arguments               = /code/DataCompress.py $(Process)
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+error                   = outfiles/Compressing_$(Process).err
+output                  = outfiles/Compressing_$(Process).out
+log                     = outfiles/Compressing.log
+request_cpus            = 1
+max_retries             = 10
+periodic_release        = (HoldReasonCode == 35) && (NumJobStarts < 10)
+
+request_disk            = 1GB
+request_memory          = 53GB
+queue 21
