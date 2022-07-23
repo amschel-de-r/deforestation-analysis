@@ -2,7 +2,7 @@
 
 
 universe                = docker
-docker_image            = nathanlazarus/pythondeforestation:compressing
+docker_image            = nathanlazarus/pythondeforestation:compressing2
 executable              = python
 transfer_executable     = False
 arguments               = /code/DataCompress.py $(Process)

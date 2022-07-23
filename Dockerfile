@@ -5,6 +5,7 @@ FROM python:3.9-slim-buster
 WORKDIR /code
 
 COPY DataClean.py .
+COPY DataCompress.py .
 COPY countryoutlines.py .
 COPY hansenhandler.py .
 COPY tile.py .
