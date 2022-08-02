@@ -10,6 +10,7 @@ import pycountry
 
 # Rasters - pixel data
 import rasterio
+import rasterio.profiles
 from rasterio.enums import Resampling
 
 # Polygons - country outlines
@@ -92,10 +93,13 @@ def save_rescaled(coords):
 
         loss = loss_raster.read(1)
 
+        profile.__setitem__("dtype", rasterio.float32)
+
         for y in range(1, 21):
 
             with rasterio.open("temp.tif", "w", **profile) as temp:
-                band = (loss == y).astype(float)
+                band = (loss == y).astype(rasterio.float32)
+                
                 temp.write(band, 1)
                 del band
 
